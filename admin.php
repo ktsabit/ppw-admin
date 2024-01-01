@@ -1,14 +1,19 @@
 <?php
 require "fungsi.php";
 
-$data = mysqli_query($konek, "SELECT * FROM users");
+// $data = mysqli_query($konek, "SELECT * FROM users");
+$data = query("SELECT * FROM users");
+
+if (isset($_POST["cari"])) {
+    $data = cari($_POST["keyword"]);
+}
 ?>
 
 <html>
 
 <head>
     <title>Admin</title>
-    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -22,6 +27,11 @@ $data = mysqli_query($konek, "SELECT * FROM users");
         <h1 class="teks">Data User</h1>
         <a href="tambah.php" class="button">Tambah User</a>
 
+        <form action="" method="POST" class="form">
+            <input type="text" name="keyword" placeholder="Search" autocomplete="off" class="input">
+            <button type="submit" name="cari" class="cari">Cari</button>
+        </form>
+
         <table class="tabel">
             <tr>
                 <th>No.</th>
@@ -29,12 +39,12 @@ $data = mysqli_query($konek, "SELECT * FROM users");
                 <th>Name</th>
                 <th>Username</th>
                 <th>Created At</th>
-                <th>Settings</th>
+                <th></th>
             </tr>
 
             <?php $i = 1; ?>
             <?php
-            while ($row = mysqli_fetch_assoc($data)) :
+            foreach ($data as $row) :
             ?>
                 <tr>
                     <td><?= $i; ?></td>
@@ -43,12 +53,12 @@ $data = mysqli_query($konek, "SELECT * FROM users");
                     <td><?= $row["username"] ?></td>
                     <td><?= $row["created_at"] ?></td>
                     <td>
-                        <a href="ubah.php?id=<?= $row["id"]?>" class="btn">Ubah</a>
-                        <a href="hapus.php?id=<?= $row["id"]?>" class="bttn">Hapus</a>
+                        <a href="ubah.php?id=<?= $row["id"] ?>" class="btn">Edit</a>
+                        <a href="hapus.php?id=<?= $row["id"] ?>" class="bttn">Delete</a>
                     </td>
                 </tr>
                 <?php $i++; ?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </table>
     </div>
 

@@ -151,3 +151,26 @@ body{
     color: green;
     margin-left:55px;
 }
+
+.form{
+    margin-left: 30px;
+}
+
+.input{
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.cari{
+    height: 40px;
+    border-radius: 10px;
+    width: 50px;
+    background-color: green;
+    color: white;
+}
+
+.cari:hover{
+    background-color: #66B357;
+    cursor: pointer;
+}

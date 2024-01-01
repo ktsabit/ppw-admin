@@ -74,4 +74,13 @@ function ubah($data){
     mysqli_query($konek, $query);
     return mysqli_affected_rows($konek);
 }
+
+function cari($keyword){
+    $query = "SELECT * FROM users 
+    WHERE name LIKE '%$keyword%' 
+    OR username LIKE '%$keyword%'";
+
+    return query($query);
+}
+
 ?>
